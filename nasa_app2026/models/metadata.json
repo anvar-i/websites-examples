@@ -1,0 +1,67 @@
+{
+  "target": "target_next_day_detected: at least one FIRMS detection in the same approximately 1 km2 cell on the next UTC calendar day",
+  "probability_semantics": "probability of a future FIRMS satellite detection, not probability of a real fire starting or confirmation of fire",
+  "eligible_input_rows": "cell-day rows with at least one FIRMS detection today",
+  "feature_columns": [
+    "detections",
+    "mean_brightness",
+    "mean_scan",
+    "mean_track",
+    "mean_bright_t31",
+    "mean_frp",
+    "mean_modis_confidence",
+    "modis_detections",
+    "viirs_detections",
+    "archive_detections",
+    "nrt_detections",
+    "day_detections",
+    "night_detections",
+    "sat_aqua",
+    "sat_terra",
+    "sat_n20",
+    "sat_n21",
+    "sat_snpp",
+    "viirs_conf_l",
+    "viirs_conf_n",
+    "viirs_conf_h",
+    "type_0",
+    "type_1",
+    "type_2",
+    "type_3",
+    "day_of_year_sin",
+    "day_of_year_cos"
+  ],
+  "library": "LightGBM",
+  "library_version": "4.7.0",
+  "artifact_format": "LightGBM text model plus JSON calibration parameters",
+  "model_path": "models\\firms_next_day_lightgbm.txt",
+  "calibration_path": "models\\calibration.json",
+  "selected_configuration": {
+    "name": "medium",
+    "num_leaves": 31,
+    "max_depth": 7,
+    "learning_rate": 0.05,
+    "min_data_in_leaf": 200,
+    "lambda_l2": 2.0,
+    "num_boost_round": 250
+  },
+  "calibration_method": "platt_sigmoid",
+  "fit_feature_dates": {
+    "start": "2025-12-31",
+    "end": "2026-07-25"
+  },
+  "calibration_fit_dates": {
+    "start": "2026-07-26",
+    "end": "2026-08-05"
+  },
+  "split_dates": {
+    "candidate_model_fit": "through 2026-06-24",
+    "configuration_validation": "2026-06-25 through 2026-07-25",
+    "calibrator_fit": "2026-07-26 through 2026-08-05",
+    "calibrator_selection": "2026-08-06 through 2026-08-11",
+    "official_test": "from 2026-08-12"
+  },
+  "missing_values": "Reject missing, non-numeric, NaN, or infinite feature values; provide every listed feature.",
+  "utc_target_date": "date_utc + 1 calendar day; date_utc must be an ISO YYYY-MM-DD date in UTC",
+  "seed": 20261106
+}
